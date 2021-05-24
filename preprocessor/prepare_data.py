@@ -68,11 +68,12 @@ def prepare(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out", type=str)
+    
+    #parser.add_argument("--out", type=str)
     parser.add_argument("--size", type=str, default="128,256,512,1024")
     parser.add_argument("--n_worker", type=int, default=5)
     parser.add_argument("--resample", type=str, default="bilinear")
-    parser.add_argument("path", type=str)
+    #parser.add_argument("path", type=str)
 
     args = parser.parse_args()
 
@@ -82,7 +83,10 @@ if __name__ == "__main__":
     sizes = [int(s.strip()) for s in args.size.split(",")]
     print(f"Make dataset of image sizes:", ", ".join(str(s) for s in sizes))
 
-    imgset = datasets.ImageFolder(args.path)
+    #print(args.path,'asdf')
+  
 
-    with lmdb.open(args.out, map_size=1024 ** 4, readahead=False) as env:
+    imgset = datasets.ImageFolder('/home/zen/StyleMapGAN/preprocessor/')#args.path)
+
+    with lmdb.open('/home/zen/StyleMapGAN/preprocessor/', map_size=1024 ** 4, readahead=False) as env:
         prepare(env, imgset, args.n_worker, sizes=sizes, resample=resample)
