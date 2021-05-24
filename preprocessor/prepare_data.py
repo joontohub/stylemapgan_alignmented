@@ -51,7 +51,7 @@ def prepare(
     files = sorted(dataset.imgs, key=lambda x: x[0])
     files = [(i, file) for i, (file, label) in enumerate(files)]
     total = 0
-
+    print("s")
     with multiprocessing.Pool(n_worker) as pool:
         for i, imgs in tqdm(pool.imap_unordered(resize_fn, files)):
             for size, img in zip(sizes, imgs):
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     sizes = [int(s.strip()) for s in args.size.split(",")]
     print(f"Make dataset of image sizes:", ", ".join(str(s) for s in sizes))
-
+    print('ss')
     #print(args.path,'asdf')
   
 
